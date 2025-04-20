@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>תוצאות זיהוי פסולת</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
+    }
+    .header {
+      background: #f8b8d0;
+      padding: 0.8em;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 1.4em;
+      color: #333;
+    }
+    .result-container {
+      margin: 1em auto;
+      max-width: 800px;
+      padding: 0 1em;
+    }
+    .result-image {
+      max-width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .detections {
+      margin-top: 1.5em;
+      text-align: right;
+      background: #fff;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .detection-item {
+      margin-bottom: 0.5em;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid #eee;
+    }
+    .detection-item:last-child {
+      border-bottom: none;
+    }
+    .confidence {
+      color: #008800;
+      font-weight: bold;
+    }
+    .buttons {
+      margin: 2em 0;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+    button {
+      margin: 0.5em;
+      padding: 0.8em 1.5em;
+      font-size: 1.1em;
+      cursor: pointer;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .camera-btn {
+      background-color: #2196F3;
+    }
+    .camera-btn:hover {
+      background-color: #1976D2;
+    }
+    .new-capture-btn {
+      background-color: #4CAF50;
+    }
+    .new-capture-btn:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>תוצאות זיהוי פסולת</h1>
+  </div>
+  
+  <div class="result-container">
+    <img class="result-image" src="{{ image_path }}" alt="תמונה עם תוצאות זיהוי">
+    
+    <div class="detections">
+      <h2>זוהו {{ detections|length }} פריטים</h2>
+      
+      {% if detections %}
+        {% for det in detections %}
+        <div class="detection-item">
+          <strong>{{ det.class_label }}</strong> 
+          <span class="confidence">({{ "%.2f"|format(det.class_confidence*100) }}%)</span>
+          <div>מיקום: X1={{ det.bbox[0] }}, Y1={{ det.bbox[1] }}, X2={{ det.bbox[2] }}, Y2={{ det.bbox[3] }}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p>לא זוהו פריטים</p>
+      {% endif %}
+    </div>
+    
+    <div class="buttons">
+      <button class="new-capture-btn" onclick="location.href='{{ url_for('camera') }}'">
+        📸 צלם תמונה חדשה
+      </button>
+      <button class="camera-btn" onclick="window.history.back()">
+        🔙 חזרה למצלמה
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // הדגשת כפתורי החזרה
+    document.addEventListener('DOMContentLoaded', function() {
+      const cameraButton = document.querySelector('.camera-btn');
+      
+      // אנימציה קלה להדגשת הכפתור
+      setTimeout(() => {
+        cameraButton.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          cameraButton.style.transform = 'scale(1)';
+        }, 300);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

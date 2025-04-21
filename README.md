@@ -1,6 +1,6 @@
 זוהי מערכת מבוססת דפדפן לזיהוי ומיון פסולת בזמן אמת בעזרת ראייה ממוחשבת ולמידת מכונה. המשתמש מצלם תמונה של אשפה בעזרת מצלמת הטלפון, והמערכת חוזה את סוג הפסולת ומציגה את התוצאה.
 
-💡 טכנולוגיות שבהן השתמשתי
+טכנולוגיות שבהן השתמשתי
 Python
 Flask – ליצירת שרת צד שרת
 YOLOv8 – לזיהוי אובייקטים בתמונה
@@ -8,7 +8,7 @@ YOLOv8 – לזיהוי אובייקטים בתמונה
 HTML / CSS / JS – לבניית הממשק
 DroidCam – לחיבור מצלמת הטלפון לאתר
 
-▶️ איך להריץ את המערכת
+איך להריץ את המערכת
 הורידו את הקבצים או שיבטו (clone) את הריפוזיטורי.
 ודאו ש־Python 3.10 ומעלה מותקן.
 צרו סביבת פיתוח וירטואלית והפעילו אותה:
@@ -43,7 +43,7 @@ python app_submit.py
 This project is a web-based application for real-time **trash classification and detection** using computer vision and deep learning. 
 It enables users to capture images of trash using their phone camera and instantly receive predictions about the type of waste, helping sort it into the correct recycling bin.
 
-### 💡 Technologies Used
+### Technologies Used
 
 - **Python**
 - **Flask** – for creating the backend web server
@@ -52,7 +52,7 @@ It enables users to capture images of trash using their phone camera and instant
 - **HTML/CSS/JS** – for building the web interface
 - **DroidCam** – for connecting a mobile phone camera to the app
 
-### ▶️ How to Run the Project
+### How to Run the Project
 
 1. Clone the repository or download it as a ZIP and extract it.
 2. Make sure you have Python 3.10+ installed.
